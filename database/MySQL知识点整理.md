@@ -1,5 +1,7 @@
 什么是MySQL?
 
+https://mp.weixin.qq.com/s/i6CCRkF1B-RZ7ekFrpNiNQ
+
 MySQL 是一种关系型数据库，在Java企业级开发中非常常用，因为 MySQL 是开源免费的，并且方便扩展。阿里巴巴数据库系统也大量用到了 MySQL，因此它的稳定性是有保障的。MySQL是开放源代码的，因此任何人都可以在 GPL(General Public License) 的许可下下载并根据个性化的需要对其进行修改。MySQL的默认端口号是3306。
 
 事务相关
@@ -58,13 +60,11 @@ REPEATABLE-READ(可重复读)： 对同一字段的多次读取结果都是一�
 SERIALIZABLE(可串行化)： 最高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及幻读。
 
 
-
 隔离级别	脏读	不可重复读	幻影读
 READ-UNCOMMITTED	√	√	√
 READ-COMMITTED	×	√	√
 REPEATABLE-READ	×	×	√
 SERIALIZABLE	×	×	×
-
 MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重读）。我们可以通过SELECT @@tx_isolation;命令来查看
 mysql> SELECT @@tx_isolation;
 +-----------------+
@@ -82,7 +82,6 @@ InnoDB 存储引擎在 分布式事务 的情况下一般会用到SERIALIZABLE(�
 
 
 为什么索引能提高查询速度
-以下内容整理自：《数据库两大神器【索引和锁】》作者 ：Java3y
 先从 MySQL 的基本存储结构说起
 MySQL的基本存储结构是页 (记录都存在页里边) ：
 
@@ -120,7 +119,7 @@ MySQL的基本存储结构是页
 
 很明显的是：没有用索引我们是需要遍历双向链表来定位对应的页，现在通过 “目录” 就可以很快地定位到对应的页上了！（二分查找，时间复杂度近似为O(logn)）
 其实底层结构就是B+树，B+树作为树的一种实现，能够让我们很快地查找出对应的记录。
-以下内容整理自：《Java工程师修炼之道》
+
 什么是最左前缀原则？
 
 MySQL中的索引可以以一定顺序引用多列，这种索引叫作联合索引。如User表的name和city加联合索引就是(name,city)，而最左前缀原则指的是，如果查询的时候查询条件精确匹配索引的左边连续一列或几列，则此列就可以被用到。如下：
